@@ -44,6 +44,19 @@ function secretlyshameless_setup() {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
+	/*
+	 * Enable support for custom logo
+	*/
+	add_theme_support( 'custom-logo', array(
+		'height'      => 100,
+		'width'       => 400,
+		'flex-height' => true,
+		'flex-width'  => true,
+		'header-text' => array( 'site-title', 'site-description' ),
+	) );
+	
+
+
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'primary' => esc_html__( 'Primary', 'secretlyshameless' ),
@@ -104,18 +117,30 @@ add_action( 'after_setup_theme', 'secretlyshameless_content_width', 0 );
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
+
+
 function secretlyshameless_widgets_init() {
-	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'secretlyshameless' ),
-		'id'            => 'sidebar-1',
-		'description'   => '',
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+
+	$sidebars = array(
+		'sidebar-1' => 'Main Sidebar',
+		'sidebar-11' => 'Secondary Sidebar'
+	);
+	foreach ( $sidebars as $id => $sidebar ){
+		register_sidebar(
+			 array(
+				'name'          => esc_html__($sidebar, 'secretlyshameless' ),
+				'id'            => $id,
+				'description'   => '',
+				'before_widget' => '<section id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</section>',
+				'before_title'  => '<h2 class="widget-title %1$s">',
+				'after_title'   => '</h2>',
+			) );
+	}
 }
 add_action( 'widgets_init', 'secretlyshameless_widgets_init' );
+
+
 
 /**
  * Enqueue scripts and styles.

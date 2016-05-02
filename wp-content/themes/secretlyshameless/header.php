@@ -24,6 +24,9 @@
 <div id="page" class="site <?php echo get_theme_mod( 'layout_setting', 'no-sidebar' ); ?>">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'secretlyShameless' ); ?></a>
 
+	<!--add widget area-->
+	
+
 	<?php if ( get_header_image() ) { ?>
 		<header id="masthead" class="site-header" style="background-image: url(<?php header_image(); ?>)" role="banner">
 	<?php } else { ?>
@@ -48,13 +51,26 @@
 				<?php } ?>
 			</a>
 		</div>
-		
+
+
+		<?php // Display site logo or blog title name ?>
 		<div class="site-branding<?php if ( is_singular() ) { echo ' screen-reader-text'; } ?>">
+			
+
 			<?php if ( is_front_page() && is_home() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+						
+						<?php has_custom_logo() ?  the_custom_logo() :  bloginfo( 'name' ); ?>
+					</a></h1>
+
+
 			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+					<?php has_custom_logo() ?  the_custom_logo() :  bloginfo( 'name' ); ?>
+				</a></p>
 			<?php endif;
+
+
 			$description = get_bloginfo( 'description', 'display' );
 			if ( $description || is_customize_preview() ) : ?>
 				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
