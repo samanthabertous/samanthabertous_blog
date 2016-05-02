@@ -123,7 +123,7 @@ function secretlyshameless_widgets_init() {
 
 	$sidebars = array(
 		'sidebar-1' => 'Main Sidebar',
-		'sidebar-11' => 'Secondary Sidebar'
+		'sidebar-12' => 'Secondary Sidebar'
 	);
 	foreach ( $sidebars as $id => $sidebar ){
 		register_sidebar(
@@ -138,7 +138,7 @@ function secretlyshameless_widgets_init() {
 			) );
 	}
 }
-add_action( 'widgets_init', 'secretlyshameless_widgets_init' );
+add_action( 'widgets_init', 'secretlyshameless_widgets_init' ); 
 
 
 
